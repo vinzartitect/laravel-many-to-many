@@ -34,7 +34,27 @@
             <label for="image">Immagine del post</label>
             <input type="url" class="form-control" id="image" placeholder="url dell'immagine" name="image" value="{{ old('image', $post->image) }}">
         </div>
-        <button type="submit" class="btn btn-success">Modifica</button>
+
+        <hr>
+        <h3>Seleziona tags:</h3>
+        
+        @foreach ( $tags as $tag )
+            <div class="form-check form-check-inline">
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="tag-{{ $tag->id }}"
+                    value=" {{ $tag->id }} "
+                    name="tags[]"
+                    @if ( in_array($tag->id, old('tags', $post_tags_id ) ) ) checked @endif
+                >
+                <label class="form-check-label" for="tag-{{ $tag->id }}">{{ $tag->label }}</label>
+            </div>
+        @endforeach
+
+        <div>
+            <button type="submit" class="btn btn-success">Modifica</button>
+        </div>
 
     </form>
 </div>
